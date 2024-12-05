@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cardápio - Hamburgueria Nova Delícia</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Hamburgueria Nova Delícia</h1>
+        <nav>
+            <a href="cadastro_login.html">Cadastro/Login</a>
+            <a href="menu.html">Cardápio</a>
+            <a href="carrinho.html">Carrinho</a>
+            <a href="finalizar.html">Finalizar Compra</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Cardápio</h2>
+        <div id="menuItens" class="menu-hamburguer">
+            <div class="item">
+                <img src="burger.jpg" alt="X Burger">
+                <h3>X Burger</h3>
+                <p>R$ 20,00</p>
+                <button onclick="adicionarAoCarrinho({ nome: 'X-Burger', preco: 20 })">Adicionar</button>
+            </div>
+            <div class="item">
+                <img src="bacon.jpg" alt="X Bacon">
+                <h3>X Bacon</h3>
+                <p>R$ 25,00</p>
+                <button onclick="adicionarAoCarrinho({ nome: 'X-Bacon', preco: 25 })">Adicionar</button>
+            </div>
+            <div class="item">
+                <img src="salada.jpg" alt="X Salada">
+                <h3>X Salada</h3>
+                <p>R$ 21,00</p>
+                <button onclick="adicionarAoCarrinho({ nome: 'X-Salada', preco: 21 })">Adicionar</button>
+            </div>
+            <div class="item">
+                <img src="tudo.jpg" alt="X Tudo">
+                <h3>X Tudo</h3>
+                <p>R$ 22,00</p>
+                <button onclick="adicionarAoCarrinho({ nome: 'X-Tudo', preco: 22 })">Adicionar</button>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer>
+        <p>© 2024 Hamburgueria Nova Delícia</p>
+    </footer>
+    <script>
+        function logout() {
+            localStorage.clear(); // Limpa o armazenamento local
+            alert("Você foi desconectado.");
+            window.location.href = "cadastro_login.html";
+        }
+    </script>
+
+    <script src="menu.js"></script>
+</body>
+</html>
+
+
+
+

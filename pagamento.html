@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagamento - Hamburgueria Nova Delícia</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+    </header>
+    <script src="menu.js"></script>
+    <main>
+        <h2>Escolha a Forma de Pagamento</h2>
+        <div class="pedido">
+            <h3>Resumo do Pedido</h3>
+            <div id="pedidoResumo"></div>
+            <h3 id="total">Total: R$ 0,00</h3>
+        </div>
+        <form id="pagamentoForm">
+            <h3>Método de Pagamento</h3>
+            <div class="radio-group">
+                <label for="cartao">
+                    Cartão de Crédito:
+                    <input type="radio" id="cartao" name="metodoPagamento" value="cartao" required>
+                </label>
+                <label for="pix">
+                    Pix:
+                    <input type="radio" id="pix" name="metodoPagamento" value="pix">
+                </label>
+            </div>
+            
+            <div id="cartaoPagamento" style="display: none;">
+                <div class="input-group">
+                    <label for="nomeCartao">Nome no Cartão:</label>
+                    <input type="text" id="nomeCartao" placeholder="Nome Completo" required>
+                </div>
+                <div class="input-group">
+                    <label for="numeroCartao">Número do Cartão:</label>
+                    <input type="text" id="numeroCartao" maxlength="19" placeholder="1234 5678 9012 3456" pattern="\d{4} \d{4} \d{4} \d{4}" required>
+                </div>
+                <div class="input-group">
+                    <label for="validadeCartao">Validade:</label>
+                    <input type="text" id="validadeCartao" placeholder="MM/AA" pattern="\d{2}/\d{2}" required>
+                </div>
+                <div class="input-group">
+                    <label for="cvvCartao">CVV:</label>
+                    <input type="text" id="cvvCartao" maxlength="3" placeholder="123" required>
+                </div>
+            </div>
+
+            <button type="submit">Pagar</button>
+        </form>
+    </main>
+    <footer>
+        <p>© 2024 Hamburgueria Nova Delícia</p>
+    </footer>
+    <script src="pagamento.js"></script>
+</body>
+</html>
