@@ -42,6 +42,22 @@
                 <button type="submit">Cadastrar</button>
             </form>
         </section>
+        
+        <!-- Esqueci minha senha -->
+        <section id="forgotPasswordSection" style="display: none;">
+            <h2>Recuperar Senha</h2>
+            <form id="forgotPasswordForm">
+                <label for="emailForgot">Email:</label>
+                <input type="email" id="emailForgot" placeholder="Digite seu email" required>
+                <button type="submit">Validar Email</button>
+            </form>
+            <form id="resetPasswordForm" style="display: none;">
+                <label for="newPassword">Nova Senha:</label>
+                <input type="password" id="newPassword" placeholder="Digite sua nova senha" required>
+                <button type="submit">Redefinir Senha</button>
+            </form>
+            <button id="backToLoginBtn">Voltar ao Login</button>
+        </section>
     </main>
 
     <footer>

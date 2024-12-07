@@ -71,6 +71,72 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
     });
 });
 
+// Navegar para a página de "Esqueci minha senha"
+document.getElementById("forgotPasswordBtn").addEventListener("click", () => {
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("forgotPasswordSection").style.display = "block";
+});
+
+// Voltar ao login
+document.getElementById("backToLoginBtn").addEventListener("click", () => {
+    document.getElementById("forgotPasswordSection").style.display = "none";
+    document.getElementById("loginSection").style.display = "block";
+});
+
+// Validar email e habilitar redefinição de senha
+document.getElementById("forgotPasswordForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const email = document.getElementById("emailForgot").value;
+
+    fetch("http://localhost:8080/usuario/email", {
+        method: "POST",
+        headers: { "Content-Type": "text/plain" }, // Define o tipo como texto puro
+        body: email, // Envia a string diretamente
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error("Email não encontrado!");
+        }
+        return response.text();
+    })
+    .then(() => {
+        alert("Email validado com sucesso! Por favor, defina uma nova senha.");
+        document.getElementById("forgotPasswordForm").style.display = "none";
+        document.getElementById("resetPasswordForm").style.display = "block";
+    })
+    .catch((error) => {
+        alert("Erro: " + error.message);
+    });
+});
+
+// Redefinir a senha
+document.getElementById("resetPasswordForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const email = document.getElementById("emailForgot").value;
+    const senha = document.getElementById("newPassword").value;
+
+    fetch("http://localhost:8080/usuario/reset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, senha }),
+    })
+    .then((response) => {
+        if (!response.status === 200) {
+            throw new Error("Erro ao redefinir a senha.");
+            return response.json();
+        } else {
+            alert("Senha redefinida com sucesso! Você pode fazer login agora.");
+            window.location.href = "cadastro_login.html";
+
+        }
+    })
+    .then(() => {
+    })
+    .catch((error) => {
+        alert("Erro: " + error.message);
+    });
+});
+
 // Logout
 function logout() {
     alert("Você foi desconectado.");
