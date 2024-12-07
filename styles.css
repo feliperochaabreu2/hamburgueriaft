@@ -143,6 +143,7 @@ button:hover {
     background-color: #ffcc00;
 }
 
+
 .pedido {
     background-color: #222;
     border: 1px solid #555;
@@ -150,7 +151,7 @@ button:hover {
     padding: 15px;
     margin: 10px auto;
     max-width: 600px;
-    color: #FFA500;
+    color: #ffa500;
 }
 
 .pedido h3 {
@@ -219,4 +220,3 @@ button:hover {
     color: #888;
     font-style: italic;
 }
-
