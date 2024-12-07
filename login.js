@@ -7,12 +7,13 @@ document.getElementById("createAccountBtn").addEventListener("click", () => {
 document.getElementById("signupForm").addEventListener("submit", function (e) {
     e.preventDefault();
     const nome = document.getElementById("nome").value;
+    const cpf = document.getElementById("cpf").value;
     const telefone = document.getElementById("telefone").value;
     const endereco = document.getElementById("endereco").value;
     const email = document.getElementById("emailSignup").value;
     const senha = document.getElementById("senhaSignup").value;
 
-    const usuario = { nome, telefone, endereco, email, senha };
+    const usuario = { nome, cpf, telefone, endereco, email, senha };
 
     // Envia os dados ao backend para criar o usuário
     fetch("http://localhost:8080/usuario/cadastrar", {
