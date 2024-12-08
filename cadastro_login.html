@@ -10,6 +10,7 @@
     </header>
     <script src="menu.js"></script>
     <main>
+       <!--Formulário 
         <section id="loginSection">
             <h2>Login</h2>
             <form id="loginForm">
@@ -22,6 +23,29 @@
             </form>
             <button id="createAccountBtn">Criar Conta</button>
         </section>
+    -->
+    <section id="loginSection">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="identificacao">E-mail ou CPF:</label>
+            <input type="text" id="identificacao" placeholder="Digite seu e-mail ou CPF" maxlength="50"
+                   oninput="
+                       if (this.value.includes('@')) {
+                           this.setAttribute('maxlength', '50'); // Máximo para e-mail
+                       } else {
+                           this.setAttribute('maxlength', '14'); // Máximo para CPF com máscara
+                           this.value = this.value.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                       }"
+                   required>
+            <label for="senhaLogin">Senha:</label>
+            <input type="password" id="senhaLogin" placeholder="Digite sua senha" required>
+            <button type="submit">Entrar</button>
+            <button id="forgotPasswordBtn">Esqueci minha senha</button>
+        </form>
+        <button id="createAccountBtn">Criar Conta</button>
+    </section>
+    
+    
         
         <!--Formulário de cadastro-->
         <section id="signupSection" style="display: none;">

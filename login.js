@@ -37,6 +37,8 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
 });
 
 // Login de usuário existente
+
+/*
 document.getElementById("loginForm").addEventListener("submit", function (e) {
     e.preventDefault();
     const email = document.getElementById("emailLogin").value;
@@ -70,6 +72,52 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
         alert("Email ou senha inválidos!");
     });
 });
+
+*/
+
+// Login de usuário existente
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const identificacao = document.getElementById("identificacao").value.trim();
+    const senha = document.getElementById("senhaLogin").value;
+
+    // Validação básica para CPF ou e-mail
+    const cpfPattern = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+    const isEmail = identificacao.includes('@');
+
+    if (!isEmail && !cpfPattern.test(identificacao)) {
+        alert("Por favor, insira um e-mail ou CPF válido.");
+        return;
+    }
+
+    // Cria os parâmetros no formato x-www-form-urlencoded
+    const params = new URLSearchParams();
+    params.append("identificacao", identificacao);
+    params.append("senha", senha);
+
+    // Envia as credenciais ao backend para autenticação
+    fetch("http://localhost:8080/usuario/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params.toString(),
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error("Identificação ou senha inválidos!");
+        }
+        return response.json();
+    })
+    .then((usuario) => {
+        sessionStorage.setItem("usuarioLogado", JSON.stringify(usuario)); // Marca o usuário como logado
+        alert(`Bem-vindo(a), ${usuario.nome}!`);
+        window.location.href = "menu.html"; // Redireciona para o menu
+    })
+    .catch((error) => {
+        alert("Identificação ou senha inválidos!");
+    });
+});
+
 
 // Navegar para a página de "Esqueci minha senha"
 document.getElementById("forgotPasswordBtn").addEventListener("click", () => {
