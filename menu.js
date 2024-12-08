@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector("header");
     if (header) {
         header.innerHTML = `
-            <h1>Hamburgueria Nova Delícia</h1>
+            <h1><a href="menu.html" style="text-decoration: none; color: inherit;">Hamburgueria Nova Delícia</a></h1>
             <nav>
                 <a href="cadastro_login.html">Cadastro/Login</a>
                 <a href="menu.html">Cardápio</a>
