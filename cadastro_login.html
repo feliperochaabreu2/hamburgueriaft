@@ -2,72 +2,63 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login/Cadastro - Hamburgueria Nova Delícia</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
+        <h1>Hamburgueria Nova Delícia</h1>
     </header>
-    <script src="menu.js"></script>
+
     <main>
-       <!--Formulário 
+        <!-- Seção de Login -->
         <section id="loginSection">
             <h2>Login</h2>
             <form id="loginForm">
-                <label for="emailLogin">Email:</label>
-                <input type="email" id="emailLogin" placeholder="Digite seu email" required>
+                <label for="identificacao">E-mail ou CPF:</label>
+                <input type="text" id="identificacao" placeholder="Digite seu e-mail ou CPF" maxlength="50" required>
                 <label for="senhaLogin">Senha:</label>
                 <input type="password" id="senhaLogin" placeholder="Digite sua senha" required>
                 <button type="submit">Entrar</button>
-                <button id="forgotPasswordBtn">Esqueci minha senha</button>
+                <button id="forgotPasswordBtn" type="button">Esqueci minha senha</button>
             </form>
-            <button id="createAccountBtn">Criar Conta</button>
+            <button id="createAccountBtn" type="button">Criar Conta</button>
         </section>
-    -->
-    <section id="loginSection">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <label for="identificacao">E-mail ou CPF:</label>
-            <input type="text" id="identificacao" placeholder="Digite seu e-mail ou CPF" maxlength="50"
-                   oninput="
-                       if (this.value.includes('@')) {
-                           this.setAttribute('maxlength', '50'); // Máximo para e-mail
-                       } else {
-                           this.setAttribute('maxlength', '14'); // Máximo para CPF com máscara
-                           this.value = this.value.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-                       }"
-                   required>
-            <label for="senhaLogin">Senha:</label>
-            <input type="password" id="senhaLogin" placeholder="Digite sua senha" required>
-            <button type="submit">Entrar</button>
-            <button id="forgotPasswordBtn">Esqueci minha senha</button>
-        </form>
-        <button id="createAccountBtn">Criar Conta</button>
-    </section>
-    
-    
-        
-        <!--Formulário de cadastro-->
+
+        <!-- Seção de Cadastro -->
         <section id="signupSection" style="display: none;">
             <h2>Cadastro</h2>
             <form id="signupForm">
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+
                 <label for="cpf">CPF:</label>
-                <input type="text" id="cpf" placeholder="Digite seu CPF sem pontos e traços" maxlength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')" required >
+                <input type="text" id="cpf" placeholder="Digite seu CPF" maxlength="14" 
+                       pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" 
+                       oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')" 
+                       required>
+
                 <label for="telefone">Telefone:</label>
-                <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" maxlength="15" pattern="^\(\d{2}\) \d{5}-\d{4}$" oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')" required>
+                <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" maxlength="15" 
+                       pattern="^\(\d{2}\) \d{5}-\d{4}$" 
+                       oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')" 
+                       required>
+
                 <label for="endereco">Endereço:</label>
                 <input type="text" id="endereco" placeholder="Digite seu endereço" required>
+
                 <label for="emailSignup">Email:</label>
                 <input type="email" id="emailSignup" placeholder="Digite seu email" required>
+
                 <label for="senhaSignup">Senha:</label>
                 <input type="password" id="senhaSignup" placeholder="Crie uma senha" required>
+
                 <button type="submit">Cadastrar</button>
             </form>
         </section>
-        
-        <!-- Esqueci minha senha -->
+
+        <!-- Seção Esqueci minha senha -->
         <section id="forgotPasswordSection" style="display: none;">
             <h2>Recuperar Senha</h2>
             <form id="forgotPasswordForm">
@@ -75,15 +66,15 @@
                 <input type="email" id="emailForgot" placeholder="Digite seu email" required>
                 <button type="submit">Validar Email</button>
             </form>
+
             <form id="resetPasswordForm" style="display: none;">
                 <label for="newPassword">Nova Senha:</label>
                 <input type="password" id="newPassword" placeholder="Digite sua nova senha" required>
                 <button type="submit">Redefinir Senha</button>
             </form>
-            <form id="backToLoginForm">
-                <button id="backToLoginBtn">Voltar ao Login</button>
-            </form>
-            </section>
+
+            <button id="backToLoginBtn" type="button">Voltar ao Login</button>
+        </section>
     </main>
 
     <footer>
