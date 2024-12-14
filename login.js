@@ -8,7 +8,6 @@ document.getElementById("createAccountBtn").addEventListener("click", () => {
 document.getElementById("signupForm").addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Captura os valores do formulário
     const nome = document.getElementById("nome").value.trim();
     const cpf = document.getElementById("cpf").value.trim();
     const telefone = document.getElementById("telefone").value.trim();
@@ -16,10 +15,8 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
     const email = document.getElementById("emailSignup").value.trim();
     const senha = document.getElementById("senhaSignup").value.trim();
 
-    // Criação do objeto usuário
     const usuario = { nome, cpf, telefone, endereco, email, senha };
 
-    // Envia os dados ao backend para cadastro
     fetch("http://localhost:8080/usuario/cadastrar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -33,7 +30,7 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
         })
         .then(() => {
             alert("Cadastro realizado com sucesso! Agora você pode fazer login.");
-            window.location.href = "cadastro_login.html"; // Redireciona para login
+            window.location.href = "cadastro_login.html";
         })
         .catch((error) => {
             alert("Erro no cadastro: " + error.message);
@@ -47,14 +44,12 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
     let identificacao = document.getElementById("identificacao").value.trim();
     const senha = document.getElementById("senhaLogin").value.trim();
 
-    // Aplica máscara de CPF se forem apenas 11 dígitos
-    const numericPattern = /^\d{11}$/; // 11 números
+    const numericPattern = /^\d{11}$/;
     if (numericPattern.test(identificacao)) {
         identificacao = identificacao
-            .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"); // Aplica máscara de CPF
+            .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
     }
 
-    // Validação básica para CPF ou email
     const cpfPattern = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
     const isEmail = identificacao.includes("@");
 
@@ -63,11 +58,10 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
         return;
     }
 
-    // Envia os dados ao backend como JSON
     fetch("http://localhost:8080/usuario/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: identificacao, senha }), // 'email' é usado para email ou CPF
+        body: JSON.stringify({ email: identificacao, senha }),
     })
         .then((response) => {
             if (!response.ok) {
@@ -76,6 +70,7 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
             return response.json();
         })
         .then((usuario) => {
+            sessionStorage.setItem("usuarioLogado", JSON.stringify(usuario)); // Salvar usuário logado
             alert(`Bem-vindo(a), ${usuario.nome}!`);
             window.location.href = "menu.html";
         })
@@ -152,6 +147,7 @@ document.getElementById("resetPasswordForm").addEventListener("submit", function
 
 // Logout
 function logout() {
+    sessionStorage.clear();
     alert("Você foi desconectado.");
     window.location.href = "cadastro_login.html";
 }

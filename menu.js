@@ -21,9 +21,11 @@ function logout() {
 }
 
 function isUserLoggedIn() {
-    return sessionStorage.getItem("usuarioLogado") !== null;
+    const usuario = sessionStorage.getItem("usuarioLogado");
+    console.log("Usuário Logado:", usuario); // Adicionado para depuração
+    return usuario !== null;
 }
-//função para adicionar item ao carrinho 
+
 function adicionarAoCarrinho(item) {
     if (!isUserLoggedIn()) {
         alert("Você precisa estar logado para adicionar itens ao carrinho!");
