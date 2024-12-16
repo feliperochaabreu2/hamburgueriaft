@@ -1,4 +1,3 @@
-// Função para confirmar o pedido
 function confirmarPedido() {
     const carrinho = JSON.parse(sessionStorage.getItem("carrinho")) || [];
     const usuarioLogado = JSON.parse(sessionStorage.getItem("usuarioLogado"));
@@ -14,41 +13,10 @@ function confirmarPedido() {
         return;
     }
 
-    const total = carrinho.reduce((acc, item) => acc + item.preco * item.quantidade, 0);
-
-    // Formata o pedido conforme o backend espera
-    const pedido = {
-        itens: carrinho.map(item => ({
-            nome: item.nome,
-            preco: item.preco,
-            quantidade: item.quantidade,
-        })),
-        enderecoEntrega: usuarioLogado.endereco, // Assume que o endereço está no usuário logado
-        total: total,
-    };
-
-    // Envia o pedido ao backend
-    fetch("http://localhost:8080/pedido/finalizar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(pedido),
-    })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Erro ao finalizar pedido.");
-            }
-            return response.json();
-        })
-        .then(() => {
-            // Redireciona para a página de pagamento
-            window.location.href = "pagamento.html";
-        })
-        .catch((error) => {
-            alert("Erro ao processar o pedido: " + error.message);
-        });
+    // Redireciona para a página de pagamento
+    window.location.href = "pagamento.html";
 }
 
-// Inicializa a página e preenche o resumo do pedido
 window.onload = function () {
     const carrinho = JSON.parse(sessionStorage.getItem("carrinho")) || [];
     const resumoDiv = document.getElementById("pedidoResumo");
