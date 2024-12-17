@@ -37,10 +37,24 @@ function exibirPedidos(pedidos) {
             return `
                 <div class="pedido">
                     <h3>Pedido #${pedido.idInt}</h3>
-                    <p><strong>Cliente:</strong> ${pedido.cliente}</p>
+                    <p><strong>Cliente:</strong> ${
+                        pedido.cliente ? pedido.cliente : "Cliente não cadastrado"
+                    }</p>
                     <p><strong>Endereço:</strong> ${pedido.enderecoEntrega}</p>
                     <p><strong>Total:</strong> R$ ${pedido.total.toFixed(2)}</p>
-                    <p><strong>Status:</strong> ${pedido.entregue ? "Entregue" : "Pendente"}</p>
+                    <p><strong>Status:</strong> ${
+                        pedido.status ? "Entregue" : "Pendente"
+                    }</p>
+
+                    ${
+                        !pedido.status
+                            ? `<label>
+                                <input type="checkbox" onchange="alterarStatus(${pedido.idInt}, this)">
+                                Marcar como Entregue
+                            </label>`
+                            : ""
+                    }
+
                     <h4>Itens:</h4>
                     <ul>
                         ${pedido.itens
@@ -54,4 +68,27 @@ function exibirPedidos(pedidos) {
             `;
         })
         .join("");
+}
+
+function alterarStatus(id, checkbox) {
+    if (checkbox.checked) {
+        fetch(`http://localhost:8080/pedido/status`, {
+            method: "PUT", // Ou PUT, dependendo da sua implementação
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: id }), // Envia o ID do pedido
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Erro ao atualizar o status.");
+                }
+                alert("Status do pedido atualizado para Entregue.");
+                carregarPedidos(); // Recarrega os pedidos para atualizar a lista
+            })
+            .catch((error) => {
+                alert("Erro: " + error.message);
+                checkbox.checked = false; // Desmarca o checkbox em caso de erro
+            });
+    }
 }

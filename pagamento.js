@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const pedido = {
+            cliente: usuarioLogado.email, // Adiciona a propriedade cliente com o email do usuário
             itens: carrinho.map(item => ({
                 nome: item.nome,
                 preco: item.preco,
@@ -125,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
             total: total,
             metodoPagamento: metodo,
             modoPagamento: modoPagamento, // Envia "pix" ou "credito"
+            status: false, // Adiciona um status booleano
         };
 
         try {
